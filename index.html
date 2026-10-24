@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Personal Assistant</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #fce4ec, #e8eaf6);
+            color: #333;
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px #00000010;
+        }
+
+        header h1 {
+            color: #8e5a80;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #777;
+        }
+
+        .date {
+            margin-top: 15px;
+            color: #8e5a80;
+            font-weight: bold;
+        }
+
+        .section-title {
+            margin: 25px 0 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px #00000010;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            color: #8e5a80;
+        }
+
+        .card p {
+            color: #777;
+            line-height: 1.6;
+        }
+
+        .task-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline-color: #c084b5;
+        }
+
+        button {
+            padding: 12px 18px;
+            background: #b47aab;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #94608d;
+        }
+
+        #taskList {
+            margin-top: 20px;
+            list-style: none;
+        }
+
+        #taskList li {
+            background: #fff3fa;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        #taskList li span {
+            overflow-wrap: anywhere;
+        }
+
+        #taskList li button {
+            padding: 5px 10px;
+            background: #d66b83;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 35px;
+            color: #888;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 15px;
+            }
+
+            .task-input {
+                flex-direction: column;
+            }
+        }
+
+        /* ✨ Personal Assistant Dashboard Enhancements */
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #fff0f5, #f3e8ff, #e8f4ff);
+    color: #49384f;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 24px;
+    box-shadow: 0 10px 35px rgba(160, 120, 180, 0.15);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #c05b91;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #82718a;
+    font-size: 1rem;
+}
+
+button {
+    background: linear-gradient(135deg, #e9a4c5, #c9a7eb);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(192, 91, 145, 0.2);
+}
+
+input, select, textarea {
+    border: 1px solid #ead7f0;
+    border-radius: 10px;
+    padding: 12px;
+    font-family: inherit;
+    outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #d39acb;
+    box-shadow: 0 0 0 3px rgba(211, 154, 203, 0.15);
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 10px;
+        padding: 18px;
+    }
+
+    header h1 {
+        font-size: 1.7rem;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <header>
+            <h1>✨ My Personal Assistant</h1>
+            <p>Your little space to organize your life, one day at a time.</p>
+            <div class="date" id="today"></div>
+        </header>
+
+        <h2 class="section-title">Your Daily Dashboard 🌷</h2>
+
+        <div class="grid">
+            <div class="card">
+                <h3>📅 Daily Routine</h3>
+                <p>Plan your day and stay organized.</p>
+            </div>
+
+            <div class="card">
+                <h3>🎯 My Goals</h3>
+                <p>Keep your goals in sight and take small steps forward.</p>
+            </div>
+
+            <div class="card">
+                <h3>🌸 Self-Care</h3>
+                <p>Make time for yourself, too.</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 25px;">
+            <h2>📝 Today's Tasks</h2>
+            <p>Add a task below to get started.</p>
+
+            <div class="task-input">
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="What do you need to do?"
+                >
+                <button onclick="addTask()">Add Task</button>
+            </div>
+
+            <ul id="taskList"></ul>
+        </div>
+
+        <footer>
+            Made with 💗 for a more organized life.
+        </footer>
+
+    </div>
+
+    <script>
+        document.getElementById("today").textContent =
+            new Date().toLocaleDateString("en-IN", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            });
+ function addTask(taskData = null) {
+    const input = document.getElementById("taskInput");
+
+    const task = taskData ? taskData.text : input.value.trim();
+
+    if (!task) {
+        if (!taskData) {
+            alert("Please enter a task first!");
+        }
+        return;
+    }
+
+    const li = document.createElement("li");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = taskData ? taskData.completed : false;
+
+    const taskText = document.createElement("span");
+    taskText.textContent = task;
+
+    if (checkbox.checked) {
+        taskText.style.textDecoration = "line-through";
+    }
+
+    checkbox.addEventListener("change", function () {
+        taskText.style.textDecoration =
+            checkbox.checked ? "line-through" : "none";
+
+        saveTasks();
+    });
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+
+    deleteButton.onclick = function () {
+        li.remove();
+        saveTasks();
+    };
+
+    li.appendChild(checkbox);
+    li.appendChild(taskText);
+    li.appendChild(deleteButton);
+
+    document.getElementById("taskList").appendChild(li);
+
+    if (!taskData) {
+        input.value = "";
+        input.focus();
+    }
+
+    saveTasks();
+}
+
+        function saveTasks() {
+    const tasks = [];
+
+    document.querySelectorAll("#taskList li").forEach(function(li) {
+        const taskText = li.querySelector("span");
+        const checkbox = li.querySelector('input[type="checkbox"]');
+
+        if (taskText) {
+            tasks.push({
+                text: taskText.textContent.replace(/^☐\s*|^☑\s*/, ""),
+                completed: checkbox ? checkbox.checked : false
+            });
+        }
+    });
+
+    localStorage.setItem("personalAssistantTasks", JSON.stringify(tasks));
+}
+    
+function saveTasks() {
+    const tasks = [];
+
+    document.querySelectorAll("#taskList li").forEach(function (li) {
+        const taskText = li.querySelector("span");
+        const checkbox = li.querySelector('input[type="checkbox"]');
+
+        if (taskText) {
+            tasks.push({
+                text: taskText.textContent.replace(/^☐\s*|^☑\s*/, ""),
+                completed: checkbox ? checkbox.checked : false
+            });
+        }
+    });
+
+    localStorage.setItem("personalAssistantTasks", JSON.stringify(tasks));
+}
+
+    document.getElementById("taskInput").addEventListener(
+            "keydown",
+            function (event) {
+                if (event.key === "Enter") {
+                    addTask();
+                }
+            }
+        );
+    function loadTasks() {
+    const savedTasks = JSON.parse(
+        localStorage.getItem("personalAssistantTasks") || "[]"
+    );
+
+    savedTasks.forEach(function (task) {
+        const li = document.createElement("li");
+
+        const taskText = document.createElement("span");
+        taskText.textContent = (task.completed ? "☑ " : "☐ ") + task.text;
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+
+        deleteButton.onclick = function () {
+            li.remove();
+            saveTasks();
+        };
+
+        li.appendChild(taskText);
+        li.appendChild(deleteButton);
+
+        document.getElementById("taskList").appendChild(li);
+    });
+}
+
+loadTasks();
+    </script>
+</body>
+</html>
